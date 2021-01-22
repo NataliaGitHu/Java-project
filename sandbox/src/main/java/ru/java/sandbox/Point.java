@@ -1,4 +1,3 @@
-
 package ru.java.sandbox;
 
 class Point {
