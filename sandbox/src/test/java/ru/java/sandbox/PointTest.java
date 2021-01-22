@@ -4,10 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
-// положительные числа
 
 public class PointTest {
-
+    // положительные числа
     @Test
     public void testDistance() {
         Point p1 = new Point(1.4, 1.7);
@@ -15,14 +14,15 @@ public class PointTest {
         Assert.assertEquals(Point.distance(p1, p2), 1.6124515496597098);
     }
 
-// отрицательные числа
+    // отрицательные числа
     @Test
     public void testDistance1() {
         Point p3 = new Point(-2.0, -3.0);
         Point p4 = new Point(-1.0, -7.0);
         Assert.assertEquals(Point.distance(p3, p4), 4.123105625617661);
     }
-// двузначные числа
+
+    // двузначные числа
      @Test
     public void testDistance3() {
         Point p5 = new Point(11.0, 25.0);
