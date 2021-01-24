@@ -1,6 +1,5 @@
 package ru.java.addressbook;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -21,53 +20,73 @@ public class PersonCreationTest {
     driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:\\Users\\hardy\\FirefoxPortable\\FirefoxPortable.exe"));
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.get("https://localhost/addressbook/edit.php");
+    login("admin", "secret");
   }
 
   @Test
   public void testUntitledTestCase() throws Exception {
-    driver.get("https://localhost/addressbook/edit.php");
-    driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
-    driver.findElement(By.id("LoginForm")).click();
-    driver.findElement(By.name("pass")).click();
-    driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys("secret");
-    driver.findElement(By.xpath("//input[@value='Login']")).click();
-    driver.findElement(By.linkText("add new")).click();
+    gotoAddNewPage();
+    fillContactForm(new PersonData("Natalia", "Talalova", "N", "ISSART", "89088086088", "talalovanatalia1@gmail.com", "work", "test1", "(//option[@value='1'])[3]", "18", "May", "1992"));
+    getClick();
+  }
+
+  private void getClick() {
+    driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  private void fillContactForm(PersonData personData) {
     driver.findElement(By.name("firstname")).click();
     driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("Natalia");
+    driver.findElement(By.name("firstname")).sendKeys(personData.getFirstname());
     driver.findElement(By.name("lastname")).click();
     driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys("Talalova");
+    driver.findElement(By.name("lastname")).sendKeys(personData.getSecondname());
     driver.findElement(By.name("nickname")).click();
     driver.findElement(By.name("nickname")).clear();
-    driver.findElement(By.name("nickname")).sendKeys("N");
+    driver.findElement(By.name("nickname")).sendKeys(personData.getNickname());
     driver.findElement(By.name("company")).click();
     driver.findElement(By.name("company")).clear();
-    driver.findElement(By.name("company")).sendKeys("ISSART");
+    driver.findElement(By.name("company")).sendKeys(personData.getCompanyname());
     driver.findElement(By.name("mobile")).click();
     driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("89088086088");
+    driver.findElement(By.name("mobile")).sendKeys(personData.getPhone());
     driver.findElement(By.name("work")).click();
     driver.findElement(By.name("work")).clear();
-    driver.findElement(By.name("work")).sendKeys("work");
+    driver.findElement(By.name("work")).sendKeys(personData.getWork());
     driver.findElement(By.name("email")).click();
     driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("talalovanatalia1@gmail.com");
+    driver.findElement(By.name("email")).sendKeys(personData.getEmail());
+    dateOfBirth(personData.getDay(), personData.getMonth(), personData.getYear());
+    driver.findElement(By.name("new_group")).click();
+    new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(personData.getGroup());
+    driver.findElement(By.xpath(personData.getXpathExpression())).click();
+  }
+
+  private void dateOfBirth(String Day, String Month, String Year) {
     driver.findElement(By.name("bday")).click();
-    new Select(driver.findElement(By.name("bday"))).selectByVisibleText("18");
+    new Select(driver.findElement(By.name("bday"))).selectByVisibleText(Day);
     driver.findElement(By.xpath("//option[@value='18']")).click();
     driver.findElement(By.name("bmonth")).click();
-    new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("May");
+    new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText(Month);
     driver.findElement(By.xpath("//option[@value='May']")).click();
     driver.findElement(By.name("byear")).click();
     driver.findElement(By.name("byear")).clear();
-    driver.findElement(By.name("byear")).sendKeys("1992");
-    driver.findElement(By.name("new_group")).click();
-    new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("test1");
-    driver.findElement(By.xpath("(//option[@value='1'])[3]")).click();
-    driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    driver.findElement(By.name("byear")).sendKeys(Year);
+  }
+
+  private void gotoAddNewPage() {
+    driver.findElement(By.linkText("add new")).click();
+  }
+
+  private void login(String username, String password) {
+    driver.findElement(By.name("user")).clear();
+    driver.findElement(By.name("user")).sendKeys(username);
+    driver.findElement(By.id("LoginForm")).click();
+    driver.findElement(By.name("pass")).click();
+    driver.findElement(By.name("pass")).clear();
+    driver.findElement(By.name("pass")).sendKeys(password);
+    driver.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @AfterClass(alwaysRun = true)
