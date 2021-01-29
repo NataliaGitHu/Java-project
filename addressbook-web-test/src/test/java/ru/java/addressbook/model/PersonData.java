@@ -1,4 +1,4 @@
-package ru.java.addressbook;
+package ru.java.addressbook.model;
 
 public class PersonData {
     private final String firstname;
