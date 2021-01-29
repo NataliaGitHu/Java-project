@@ -25,7 +25,7 @@ public class PersonCreationTest {
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
+  public void testNewContactCreation() throws Exception {
     gotoAddNewPage();
     fillContactForm(new PersonData("Natalia", "Talalova", "N", "ISSART", "89088086088", "talalovanatalia1@gmail.com", "work", "test1", "(//option[@value='1'])[3]", "18", "May", "1992"));
     getClick();
