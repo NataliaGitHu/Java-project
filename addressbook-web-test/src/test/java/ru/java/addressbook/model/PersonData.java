@@ -57,14 +57,6 @@ public class PersonData {
         return work;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
-    public String getXpathExpression() {
-        return xpathExpression;
-    }
-
     public String getDay() {
         return day;
     }
