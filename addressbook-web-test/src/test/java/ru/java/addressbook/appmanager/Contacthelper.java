@@ -20,7 +20,6 @@ public class Contacthelper extends HelperBase{ ;
       type(By.name("work"), personData.getWork());
       type(By.name("email"), personData.getEmail());
       dateOfBirth(personData.getDay(), personData.getMonth(), personData.getYear());
-      click(By.name("new_group"));
     }
 
   public void type(By locator, String secondname) {
@@ -51,5 +50,25 @@ public class Contacthelper extends HelperBase{ ;
 
   public void gotoAddNewPage() {
     click(By.linkText("add new"));
+  }
+
+  public void gotoHomePage() {
+    click(By.linkText("home"));
+  }
+
+  public void editContact() {
+    click(By.xpath("(//img[@alt='Edit'])[7]"));
+  }
+
+  public void clickUpdate() {
+    click(By.xpath("(//input[@name='update'])[2]"));
+
+  }
+  public void selectContact() {
+    click(By.id("13"));
+  }
+
+  public void clickDelete() {
+    click(By.xpath("(//input[@name='update'])[3]"));
   }
 }
