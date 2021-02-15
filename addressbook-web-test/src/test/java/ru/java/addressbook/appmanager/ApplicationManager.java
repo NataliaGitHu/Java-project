@@ -1,15 +1,20 @@
 package ru.java.addressbook.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
-
+    private String browser;
     WebDriver driver;
     private Contacthelper contacthelper;
     private SessionHelper sessionHelper;
@@ -19,11 +24,18 @@ public class ApplicationManager {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-    public ApplicationManager() {
+
+    public ApplicationManager(String browser){
+        this.browser = browser;
     }
 
     public void init() {
-        driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:\\Users\\hardy\\FirefoxPortable\\FirefoxPortable.exe"));
+        if (browser.equals(BrowserType.FIREFOX)){
+            driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:\\Users\\hardy\\FirefoxPortable\\FirefoxPortable.exe"));
+        }
+        else if (browser.equals(BrowserType.CHROME)){
+             driver = new ChromeDriver();
+        }
         baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("https://localhost/addressbook/");
