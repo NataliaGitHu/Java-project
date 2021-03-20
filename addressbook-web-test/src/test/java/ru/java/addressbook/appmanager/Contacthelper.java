@@ -5,22 +5,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.java.addressbook.model.PersonData;
 
-public class Contacthelper extends HelperBase{ ;
+public class Contacthelper extends HelperBase {
+  ;
 
   public Contacthelper(WebDriver driver) {
-        super(driver);
-    }
+    super(driver);
+  }
 
-    public void fillContactForm(PersonData personData) {
-      type(By.name("firstname"), personData.getFirstname());
-      type(By.name("lastname"), personData.getSecondname());
-      type(By.name("nickname"), personData.getNickname());
-      type(By.name("company"), personData.getCompanyname());
-      type(By.name("mobile"), personData.getPhone());
-      type(By.name("work"), personData.getWork());
-      type(By.name("email"), personData.getEmail());
-      dateOfBirth(personData.getDay(), personData.getMonth(), personData.getYear());
-    }
+  public void fillContactForm(PersonData personData) {
+    type(By.name("firstname"), personData.getFirstname());
+    type(By.name("lastname"), personData.getSecondname());
+    type(By.name("nickname"), personData.getNickname());
+    type(By.name("company"), personData.getCompanyname());
+    type(By.name("mobile"), personData.getPhone());
+    type(By.name("work"), personData.getWork());
+    type(By.name("email"), personData.getEmail());
+    dateOfBirth(personData.getDay(), personData.getMonth(), personData.getYear());
+  }
 
   public void type(By locator, String secondname) {
     click(locator);
@@ -41,7 +42,7 @@ public class Contacthelper extends HelperBase{ ;
   }
 
   public void getClick() {
-    click(By.xpath("(//input[@name='submit'])[2]"));
+    click(By.xpath("(//input[@name='submit'])"));
   }
 
   public void click(By locator) {
@@ -57,18 +58,28 @@ public class Contacthelper extends HelperBase{ ;
   }
 
   public void editContact() {
-    click(By.xpath("(//img[@alt='Edit'])[7]"));
+    click(By.xpath("(//img[@alt='Edit'])"));
   }
 
   public void clickUpdate() {
-    click(By.xpath("(//input[@name='update'])[2]"));
-
+    click(By.xpath("(//input[@name='update'])"));
   }
+
   public void selectContact() {
-    click(By.id("13"));
+    click(By.name("selected[]"));
   }
 
   public void clickDelete() {
-    click(By.xpath("(//input[@name='update'])[3]"));
+    click(By.xpath("(//input[@name='update'])"));
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.id("2"));
+  }
+
+  public void createContact(PersonData person) {
+    gotoAddNewPage();
+    fillContactForm(person);
+    getClick();
   }
 }
