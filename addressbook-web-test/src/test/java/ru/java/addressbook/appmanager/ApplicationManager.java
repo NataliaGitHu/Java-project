@@ -1,12 +1,8 @@
 package ru.java.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
@@ -20,8 +16,6 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
-    private String baseUrl;
-    private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
 
@@ -30,15 +24,15 @@ public class ApplicationManager {
     }
 
     public void init() {
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\hardy\\geckodriver-v0.29.1-win64\\geckodriver.exe");
         if (browser.equals(BrowserType.FIREFOX)){
-            driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:\\Users\\hardy\\FirefoxPortable\\FirefoxPortable.exe"));
+            driver = new FirefoxDriver();
         }
         else if (browser.equals(BrowserType.CHROME)){
              driver = new ChromeDriver();
         }
-        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("https://localhost/addressbook/");
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);;;
+        driver.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(driver);
         navigationHelper = new NavigationHelper(driver);
         sessionHelper = new SessionHelper(driver);
@@ -52,15 +46,7 @@ public class ApplicationManager {
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
-    }
 
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 
     public GroupHelper getGroupHelper() {
@@ -73,22 +59,8 @@ public class ApplicationManager {
 
     public SessionHelper getSessionHelper() {
         return sessionHelper;
-    }
-
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
         }
-    }
+
 
     public Contacthelper getContacthelper() {
         return contacthelper;

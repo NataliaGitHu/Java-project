@@ -74,7 +74,7 @@ public class Contacthelper extends HelperBase {
   }
 
   public boolean isThereAContact() {
-    return isElementPresent(By.id("2"));
+    return isElementPresent(By.name("selected[]"));
   }
 
   public void createContact(PersonData person) {
