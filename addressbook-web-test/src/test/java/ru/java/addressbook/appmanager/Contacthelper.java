@@ -70,7 +70,7 @@ public class Contacthelper extends HelperBase {
   }
 
   public void clickDelete() {
-    click(By.xpath("(//input[@name='update'])"));
+    click(By.xpath("//input[@value='Delete']"));
   }
 
   public boolean isThereAContact() {
@@ -81,5 +81,9 @@ public class Contacthelper extends HelperBase {
     gotoAddNewPage();
     fillContactForm(person);
     getClick();
+  }
+
+  public int getContactCount() {
+    return driver.findElements(By.name("selected[]")).size();
   }
 }
