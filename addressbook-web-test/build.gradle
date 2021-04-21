@@ -5,8 +5,9 @@ repositories{
 }
 dependencies{
   implementation 'org.testng:testng:7.3.0'
-  implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
-  implementation("org.slf4j:slf4j-simple:2.0.0-alpha1")
+  implementation 'org.seleniumhq.selenium:selenium-java:3.14.0'
+  implementation('com.google.guava:guava:30.1-jre')
+  implementation 'org.slf4j:slf4j-jcl:1.7.30'
 }
 
 test {

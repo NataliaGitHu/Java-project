@@ -24,7 +24,6 @@ public class ApplicationManager {
     }
 
     public void init() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\hardy\\geckodriver-v0.29.1-win64\\geckodriver.exe");
         if (browser.equals(BrowserType.FIREFOX)){
             driver = new FirefoxDriver();
         }
