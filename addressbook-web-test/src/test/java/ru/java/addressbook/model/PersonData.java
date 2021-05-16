@@ -1,5 +1,7 @@
 package ru.java.addressbook.model;
 
+import java.util.Objects;
+
 public class PersonData {
     private final String firstname;
     private final String secondname;
@@ -67,5 +69,25 @@ public class PersonData {
 
     public String getYear() {
         return year;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonData that = (PersonData) o;
+        return Objects.equals(firstname, that.firstname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname);
+    }
+
+    @Override
+    public String toString() {
+        return "PersonData{" +
+                "firstname='" + firstname + '\'' +
+                '}';
     }
 }

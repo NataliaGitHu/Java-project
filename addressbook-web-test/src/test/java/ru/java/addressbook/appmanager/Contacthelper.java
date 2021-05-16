@@ -2,8 +2,12 @@ package ru.java.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.java.addressbook.model.PersonData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Contacthelper extends HelperBase {
   ;
@@ -85,5 +89,19 @@ public class Contacthelper extends HelperBase {
 
   public int getContactCount() {
     return driver.findElements(By.name("selected[]")).size();
+  }
+
+  public List <PersonData> getContactList() {
+    List<PersonData> contacts = new ArrayList<PersonData>();
+    List<WebElement> elements = driver.findElements(By.name("entry"));
+    for (WebElement element: elements) {
+      String firstname = element.getText();
+      PersonData contact = new PersonData(firstname,null, null,null,null,null,null,null,null,null,null,null);
+      contacts.add(contact);
+    }
+    return contacts;
+
+
+
   }
 }
