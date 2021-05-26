@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.java.addressbook.model.PersonData;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
@@ -24,9 +23,6 @@ public class ContactModificationTests extends TestBase {
         List<PersonData> after = app.getContacthelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(before.size()-1);
-        before.add();
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 
 }

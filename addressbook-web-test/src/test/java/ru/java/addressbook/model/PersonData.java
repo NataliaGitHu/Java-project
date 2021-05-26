@@ -10,8 +10,6 @@ public class PersonData {
     private final String phone;
     private final String email;
     private final String work;
-    private final String group;
-    private final String xpathExpression;
     private final String day;
     private final String month;
     private final String year;
@@ -24,8 +22,6 @@ public class PersonData {
         phone = Phone;
         this.email = email;
         work = Work;
-        this.group = group;
-        this.xpathExpression = xpathExpression;
         this.day = day;
         this.month = month;
         this.year = year;
